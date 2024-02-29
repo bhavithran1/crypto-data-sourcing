@@ -31,3 +31,4 @@ Simply run `./main.py` to either download or update every single pair available:
 ```
 
 Once that is completed you should end up with a directory with a Parquet file for each pair, currently 970 files totaling ~12GB.
+If you are using this script to download binance data from a rescricted region please use a VPN to download the binance data.
