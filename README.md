@@ -2,12 +2,19 @@
 
 Retrieve all historical candlestick data from crypto exchange Binance
 
+<div align="center">
+<img hight="300" width="700" alt="JPEG" align="center" src="https://github.com/bhavithran1/bhavithran1/blob/main/assets/crypto.jpeg">
+</div>
+
 ## Dependencies
 
 - `pandas`
 - `requests`
 - `pyarrow`
 - `kaggle`
+
+## Symbols
+- `Update the 2022.csv file in symbols to add or remove any crypto-tickers`
 
 ## Running
 
