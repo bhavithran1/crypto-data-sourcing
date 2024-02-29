@@ -8,6 +8,9 @@ The Parquet files are much more space efficient (~50GB vs ~10GB) and are
 therefore the files used to upload to Kaggle after each run.
 """
 
+## Update the readme file to be more viewver pleasant
+## come up with the ifrastructure to integrate more exchanges in the code scraper
+
 from threading import Thread
 import json
 import os
@@ -18,40 +21,11 @@ from datetime import date, datetime, timedelta
 
 import requests
 import pandas as pd
-
 import preprocessing as pp
+from binance import METADATA, API_BASE, LABELS
 
-API_BASE = 'https://api.binance.com/api/v3/'
+Interval = '1m'
 
-LABELS = [
-    'open_time',
-    'open',
-    'high',
-    'low',
-    'close',
-    'volume',
-    'close_time',
-    'quote_asset_volume',
-    'number_of_trades',
-    'taker_buy_base_asset_volume',
-    'taker_buy_quote_asset_volume',
-    'ignore'
-]
-
-METADATA = {
-    'id': 'jorijnsmit/binance-full-history',
-    'title': 'Binance Full History',
-    'isPrivate': False,
-    'licenses': [{'name': 'other'}],
-    'keywords': [
-        'business',
-        'finance',
-        'investing',
-        'currencies and foreign exchange'
-    ],
-    'collaborators': [],
-    'data': []
-}
 
 def write_metadata(n_count):
     """Write the metadata file dynamically so we can include a pair count."""
@@ -63,7 +37,7 @@ def write_metadata(n_count):
         json.dump(METADATA, file, indent=4)
 
 
-def get_batch(symbol, interval='1m', start_time=0, limit=1000):
+def get_batch(symbol, interval=Interval, start_time=0, limit=1000):
     """Use a GET request to retrieve a batch of candlesticks. Process the JSON into a pandas
     dataframe and return it. If not successful, return an empty dataframe.
     """
@@ -98,7 +72,7 @@ def get_batch(symbol, interval='1m', start_time=0, limit=1000):
     return pd.DataFrame([])
 
 
-def all_candles_to_csv(base, quote, interval='1m'):
+def all_candles_to_csv(base, quote, interval=Interval):
     """Collect a list of candlestick batches with all candlesticks of a trading pair,
     concat into a dataframe and write it to CSV.
     """
